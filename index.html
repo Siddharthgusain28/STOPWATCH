@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="stopWatch">
+            <h2 class="watch">00:00:00:00</h2>
+            <ul class="flagTime"></ul>
+            <div class="button">
+                <button class="btn flag" disabled>Flag</button>
+                <button class="btn1 start active">Start</button>
+                <button disabled class="btn1 pause active">Pause</button>
+                <button class="btn reset" disabled>Reset</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        "use strict";
+
+        let[hours,minutes,second,milliSecond]=[0,0,0,0]
+        let watch=null;
+
+        document.querySelector(".start").classList.remove("active")
+        document.querySelector(".start").addEventListener("click",function(){
+            console.log("start");
+            function timer(){
+                milliSecond++;
+                if(milliSecond==100){
+                    milliSecond=0;
+                    second++;
+                    if(second==60){
+                        second=0;
+                        minutes++;
+                        if(minutes==60){
+                            minutes=0;
+                            hours++;
+                        }
+                    }
+                }
+
+                let s=second
+                if(s<10){
+                    s="0"+second
+                }
+                let m=minutes
+                if(m<10){
+                    m="0"+minutes
+                }
+                let h=hours
+                if(h<10){
+                    h="0"+hours
+                }
+                let ms=milliSecond
+                if(ms<10){
+                    ms="0"+milliSecond
+                }
+
+                document.querySelector(".watch").innerHTML= h +":"+ m+":"+s+":"+ms
+            }
+            function start(){
+                if(watch!==null){
+                    clearInterval(watch)
+                }
+                watch=setInterval(timer,10)
+            }
+            
+            start()
+            this.disabled=true;
+            document.querySelector(".start").classList.add("active")
+            document.querySelector(".pause").disabled=false;
+            document.querySelector(".pause").classList.remove("active")
+            document.querySelector(".flag").disabled=false;
+            document.querySelector(".reset").disabled=true
+
+            document.querySelector(".pause").addEventListener("click",function(){
+                clearInterval(watch)
+                this.disabled=true;
+                document.querySelector(".pause").classList.add("active")
+                document.querySelector(".start").disabled=false
+                document.querySelector(".start").classList.remove("active")    
+                
+                document.querySelector(".flag").disabled=true;
+                document.querySelector(".reset").disabled=false;
+            })
+
+        })
+        
+            
+        document.querySelector(".reset").addEventListener("click",function(){
+            clearInterval(watch);           
+            document.querySelector(".watch").innerHTML="00:00:00:00";
+            document.querySelector(".flagTime").innerHTML=""
+            document.querySelector(".flagTime").classList.remove("box")
+            this.disabled=true;
+            document.querySelector(".flag").disabled=true;
+
+        })
+
+
+        document.querySelector(".flag").addEventListener("click",function(e){
+            e.preventDefault();
+            document.querySelector(".flagTime").innerHTML+=`<li>${document.querySelector(".watch").innerHTML}</li>`
+            document.querySelector(".flagTime").classList.add("box")
+        })
+
+    </script>
+</body>
+</html>

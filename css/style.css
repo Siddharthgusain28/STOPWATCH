@@ -1,0 +1,24 @@
+*::after,::before{margin: 0; padding: 0;}
+button{cursor: pointer;}
+html{font-size: 15px;}
+body{font-size: 16px; font-family: system-ui,  sans-serif;}
+.container{ display: grid; place-items: center; width: 100%; height: 100vh; 
+    background: conic-gradient(#f4b3b3,#b99bde,rgb(203, 184, 184),#8c8383,#f4b3b3);}
+
+.stopWatch{ border: 3px solid #000; width: 350px; text-align: center; height: 450px; position: relative; border-radius:6px; box-shadow: 15px 10px 10px #de626244, -10px -15px 10px #a28ed844;
+background: linear-gradient(70deg,#424543,#e0d8d8,#86838c);}
+
+.btn{width: 50px; height: 50px; border-radius: 50%; border: none; background: #00f; color: #fff; font-weight: bold;}
+.btn1{width: 70px; height: 70px;margin:0 1rem; border-radius: 50%; border: none; background: #00f; color: #fff; font-weight: bold; font-size: 1rem;}
+
+.button{position: absolute; bottom: 2rem; left: 0; right: 0;}
+
+.watch{ font-size: 3rem;}
+.btn:disabled{ background: #fff; color: #00f; cursor:not-allowed;}
+
+
+.flagTime{ height: 120px; overflow: auto; }
+.box{box-shadow:0px -20px 20px #fff inset;}
+.active{display: none;}
+.active{display: none;}
+.flagTime li{ font-size: 1.8rem; list-style: decimal; list-style-position: inside; }
